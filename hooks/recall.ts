@@ -101,11 +101,11 @@ export function buildRecallHandler(client: CoreClient, cfg: CoreConfig) {
     log.debug(`recalling for turn ${turn} (profile: ${includeProfile})`);
 
     try {
-      const profile = await client.me();
+      const user = await client.me();
       const integrations = await client.getIntegrationsConnected();
-      const context = `<user_persona>${profile}</user_persona><connected_integrations>${JSON.stringify(integrations)}</connected_integrations><rules>${SEARCH_CONTEXT}</rules>`;
+      const context = `<user_persona>${user.persona}</user_persona><connected_integrations>${JSON.stringify(integrations.accounts?.map((acc) => ({ id: acc.id, accountId: acc.accountId, settings: acc.settings, slug: (acc.integrationDefinition as any).slug, name: (acc.integrationDefinition as any).name })))}</connected_integrations><rules>${SEARCH_CONTEXT}</rules>`;
 
-      if (!context) {
+      if (!context || !includeProfile) {
         log.debug("no profile data to inject");
         return;
       }
