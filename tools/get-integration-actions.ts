@@ -38,7 +38,30 @@ export function registerGetIntegrationActionsTool(
           query: params.query,
         });
 
-        return results;
+        if (!results || !results.actions || results.actions.length === 0) {
+          return {
+            content: [
+              {
+                type: "text" as const,
+                text: "No relevant actions found for this integration account.",
+              },
+            ],
+          };
+        }
+
+        // Format the actions as a readable list
+        const actionsList = results.actions
+          .map((action, i) => `${i + 1}. ${JSON.stringify(action)}`)
+          .join("\n");
+
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Found ${results.actions.length} relevant action(s):\n\n${actionsList}`,
+            },
+          ],
+        };
       },
     },
     { name: "corebrain_get_integration_actions" },

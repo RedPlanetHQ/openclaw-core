@@ -24,7 +24,7 @@ export function registerExecuteIntegrationActionTool(
           description:
             "Action name from get_integration_actions. Examples: 'get_pr', 'get_issues', 'create_issue'",
         }),
-        parameters: Type.Optional(
+        parameters: Type.Object(
           Type.Any({
             description:
               "Parameters for the action. Check the action's inputSchema from get_integration_actions to see what's required.",
@@ -45,7 +45,29 @@ export function registerExecuteIntegrationActionTool(
           parameters: params.parameters as any,
         });
 
-        return result;
+        if (!result) {
+          return {
+            content: [
+              {
+                type: "text" as const,
+                text: "Action executed but returned no data.",
+              },
+            ],
+          };
+        }
+
+        // Format the result as JSON string for readability
+        const resultText =
+          typeof result === "string" ? result : JSON.stringify(result, null, 2);
+
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Action executed successfully:\n\n${resultText}`,
+            },
+          ],
+        };
       },
     },
     { name: "corebrain_execute_integration_action" },
