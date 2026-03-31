@@ -3,7 +3,7 @@ import type { CoreConfig } from "../config.ts";
 import { log } from "../logger.ts";
 
 export const SEARCH_CONTEXT = `
-## 🔴 MANDATORY STARTUP SEQUENCE - DO NOT SKIP 🔴
+## [!] MANDATORY STARTUP SEQUENCE - DO NOT SKIP [!]
 
 **BEFORE RESPONDING TO ANY USER MESSAGE, YOU MUST EXECUTE THESE TOOLS IN ORDER:**
 
@@ -37,40 +37,40 @@ EXECUTE THIS TOOL FIRST:
 
 **Entity-Centric Queries** (Best for graph search):
 
-- ✅ GOOD: \`"User's preferences for product positioning and messaging"\`
-- ✅ GOOD: \`"CORE project authentication implementation decisions"\`
-- ❌ BAD: \`"manoj product positioning"\`
+- [+] GOOD: \`"User's preferences for product positioning and messaging"\`
+- [+] GOOD: \`"CORE project authentication implementation decisions"\`
+- [-] BAD: \`"manoj product positioning"\`
 - Format: \`[Person/Project] + [relationship/attribute] + [context]\`
 
 **Multi-Entity Relationship Queries** (Excellent for episode graph):
 
-- ✅ GOOD: \`"User and Harshith discussions about BFS search implementation"\`
-- ✅ GOOD: \`"relationship between entity extraction and recall quality in CORE"\`
-- ❌ BAD: \`"manoj harshith bfs"\`
+- [+] GOOD: \`"User and Harshith discussions about BFS search implementation"\`
+- [+] GOOD: \`"relationship between entity extraction and recall quality in CORE"\`
+- [-] BAD: \`"manoj harshith bfs"\`
 - Format: \`[Entity1] + [relationship type] + [Entity2] + [context]\`
 
 **Semantic Question Queries** (Good for vector search):
 
-- ✅ GOOD: \`"What causes BFS search to return empty results? What are the requirements for BFS traversal?"\`
-- ✅ GOOD: \`"How does episode graph search improve recall quality compared to traditional search?"\`
-- ❌ BAD: \`"bfs empty results"\`
+- [+] GOOD: \`"What causes BFS search to return empty results? What are the requirements for BFS traversal?"\`
+- [+] GOOD: \`"How does episode graph search improve recall quality compared to traditional search?"\`
+- [-] BAD: \`"bfs empty results"\`
 - Format: Complete natural questions with full context
 
 **Concept Exploration Queries** (Good for BFS traversal):
 
-- ✅ GOOD: \`"concepts and ideas related to semantic relevance in knowledge graph search"\`
-- ✅ GOOD: \`"topics connected to hop distance weighting and graph topology in BFS"\`
-- ❌ BAD: \`"semantic relevance concepts"\`
+- [+] GOOD: \`"concepts and ideas related to semantic relevance in knowledge graph search"\`
+- [+] GOOD: \`"topics connected to hop distance weighting and graph topology in BFS"\`
+- [-] BAD: \`"semantic relevance concepts"\`
 - Format: \`[concept] + related/connected + [domain/context]\`
 
 **Temporal Queries** (Good for recent work):
 
-- ✅ GOOD: \`"recent changes to search implementation and reranking logic"\`
-- ✅ GOOD: \`"latest discussions about entity extraction and semantic relevance"\`
-- ❌ BAD: \`"recent search changes"\`
+- [+] GOOD: \`"recent changes to search implementation and reranking logic"\`
+- [+] GOOD: \`"latest discussions about entity extraction and semantic relevance"\`
+- [-] BAD: \`"recent search changes"\`
 - Format: \`[temporal marker] + [specific topic] + [additional context]\`
 
-## 🔴 MANDATORY SHUTDOWN SEQUENCE - DO NOT SKIP 🔴
+## [!] MANDATORY SHUTDOWN SEQUENCE - DO NOT SKIP [!]
 
 **AFTER FULLY RESPONDING TO THE USER, YOU MUST EXECUTE THIS TOOL:**
 `;
